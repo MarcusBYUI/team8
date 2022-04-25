@@ -1,4 +1,4 @@
-function getLocalStorage(a){return JSON.parse(localStorage.getItem(a))}function getCartContents(){const a=getLocalStorage("so-cart"),r=a.map(c=>renderCartItem(c));document.querySelector(".product-list").innerHTML=r.join("")}function renderCartItem(a){const r=`<li class="cart-card divider">
+function getLocalStorage(a){return JSON.parse(localStorage.getItem(a))}function getCartContents(){const a=[getLocalStorage("so-cart")];if(a[0]!==null){const r=a.map(c=>renderCartItem(c));document.querySelector(".product-list").innerHTML=r.join("")}}function renderCartItem(a){const r=`<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
       src="${a.Image}"
