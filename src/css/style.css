@@ -201,6 +201,21 @@ button {
   grid-column: 3;
 }
 
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  background-color: #a4b8c4;
+  padding: 1rem;
+  margin: 0.5em;
+  text-align: end;
+}
+
+.cart-total {
+  font-size: 1.5rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

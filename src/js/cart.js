@@ -30,4 +30,25 @@ function renderCartItem(item) {
   return newItem;
 }
 
+function getTotal() {
+  if (getLocalStorage("so-cart") == null) {
+    document.querySelector(".cart-footer").classList.add("hide");
+  } else {
+    document.querySelector(".cart-footer").classList.remove("hide");
+
+    const cartProducts = [getLocalStorage("so-cart")];
+    let total = 0;
+
+    cartProducts.forEach((product) => {
+      total += product.FinalPrice;
+    });
+
+    document.querySelector(".cart-total").innerHTML = `Total: $${parseFloat(
+      total
+    ).toFixed(2)}`;
+  }
+}
+
+window.onload = getTotal;
+
 getCartContents();
