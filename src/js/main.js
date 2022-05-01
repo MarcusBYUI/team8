@@ -3,7 +3,7 @@ import ProductList from "./productList";
 
 const productDat = new ProductData("tents");
 
-const templateElement = document.getElementById("product-card-template");
+const containerElement = document.querySelector(".product-list");
 
-const prodcutLi = new ProductList("tents", templateElement, productDat);
+const prodcutLi = new ProductList("tents", containerElement, productDat);
 prodcutLi.init();

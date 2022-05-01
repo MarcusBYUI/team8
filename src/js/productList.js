@@ -12,25 +12,30 @@ class ProductList {
     this.renderList(this.products);
   }
 
-  async renderList(list) {
-    const productsContainer = document.querySelector(".product-list");
-
+  renderList(list) {
     list.forEach((element) => {
       // Creating cards
-      const templateElement = this.element.cloneNode(true);
-      const content = templateElement.content;
+      const templateElement = document
+        .getElementById("product-card-template")
+        .cloneNode(true);
 
-      content.querySelector("a").href += `${element.Id}`; // Completing link URL
-      content.querySelector("img").setAttribute("src", `${element.Image}`); // Setting image source
-      content
-        .querySelector("img")
-        .setAttribute("alt", `Image of ${element.NameWithoutBrand}`); // Setting image text
-      content.querySelector("h3").innerHTML = `${element.Brand.Name}`; // Writing brand name on card
-      content.querySelector("h2").innerHTML = `${element.NameWithoutBrand}`; // Writing product name
-      content.querySelector("p").innerHTML += `${element.FinalPrice}`; // Adding price
-
-      productsContainer.appendChild(content); // Appending to cards container
+      this.prepareTemplate(templateElement, element);
     });
+  }
+
+  prepareTemplate(templateClone, product) {
+    const content = templateClone.content;
+
+    content.querySelector("a").href += `${product.Id}`; // Completing link URL
+    content.querySelector("img").setAttribute("src", `${product.Image}`); // Setting image source
+    content
+      .querySelector("img")
+      .setAttribute("alt", `Image of ${product.NameWithoutBrand}`); // Setting image text
+    content.querySelector("h3").innerHTML = `${product.Brand.Name}`; // Writing brand name on card
+    content.querySelector("h2").innerHTML = `${product.NameWithoutBrand}`; // Writing product name
+    content.querySelector("p").innerHTML += `${product.FinalPrice}`; // Adding price
+
+    this.element.appendChild(content); // Appending to cards container
   }
 }
 
