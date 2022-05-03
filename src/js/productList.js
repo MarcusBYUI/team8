@@ -22,7 +22,7 @@ class ProductDetails {
 
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
-    template.querySelector("img").src += product.Image;
+    template.querySelector("img").src = product.Image;
     template.querySelector("img").alt += product.NameWithoutBrand;
     template.querySelector(".card__brand").innerHTML += product.Brand.Name;
     template.querySelector(".card__name").innerHTML += product.NameWithoutBrand;

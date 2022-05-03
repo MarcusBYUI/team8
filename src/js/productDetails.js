@@ -25,26 +25,30 @@ class ProductDetails {
   }
 
   renderProductDetails() {
-    const productTemplate = `<section class="product-detail">
-        <h3>${this.product.Brand.Name}</h3>
-        <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-        <img
-          class="divider"
-          src="${this.product.Image}"
-          alt="${this.product.Name}"
-        />
+    const template = document.getElementById("product-card-template");
 
-        <p class="product-card__price">$${this.product.ListPrice}</p>
-        <p class="product__color">${this.product.Colors[0].ColorName}</p>
-        <p class="product__description">
-          ${this.product.DescriptionHtmlSimple}
-        </p>
-        <div class="product-detail__add">
-          <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
-        </div>
-      </section>`;
+    const clone = template.content.cloneNode(true);
 
-    document.querySelector(".product-container").innerHTML = productTemplate;
+    clone.querySelector(
+      ".product-brand-name"
+    ).innerHTML = this.product.Brand.Name;
+    clone.querySelector(
+      ".product-brand-name-no-brand"
+    ).innerHTML = this.product.NameWithoutBrand;
+
+    clone.querySelector(".product-brand-image").src = this.product.Image;
+    clone.querySelector(".product-brand-image").alt += this.product.Name;
+    clone.querySelector(
+      ".product-card__price"
+    ).innerHTML += this.product.ListPrice;
+
+    clone.querySelector(
+      ".product__color"
+    ).innerHTML = this.product.Colors[0].ColorName;
+
+    clone.querySelector("#addToCart").setAttribute("data-id", this.product.Id);
+
+    document.querySelector(".product-container").appendChild(clone);
   }
 }
 
