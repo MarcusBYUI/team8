@@ -20,7 +20,6 @@ class ProductData {
 
   async findProductByID(id) {
     const products = await this.getData(`product/${id}`);
-    console.log(products)
     return products
   }
 }
