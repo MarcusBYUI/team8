@@ -1,3 +1,5 @@
+const baseURL = "http://157.201.228.93:2992/";
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -7,20 +9,17 @@ function convertToJson(res) {
 }
 
 class ProductData {
-  constructor(category) {
-    this.category = category;
-    this.path = `../json/${this.category}.json`;
-  }
+  constructor() {}
 
-  getData() {
-    return fetch(this.path)
+  async getData(category) {
+    return fetch(baseURL + category)
       .then(convertToJson)
-      .then((data) => data);
+      .then((data) => data.Result);
   }
 
   async findProductByID(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const products = await this.getData(`product/${id}`);
+    return products;
   }
 }
 

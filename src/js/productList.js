@@ -7,7 +7,7 @@ class ProductDetails {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.render(this.filter(list));
   }
 
@@ -22,7 +22,7 @@ class ProductDetails {
 
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
-    template.querySelector("img").src = product.Image;
+    template.querySelector("img").src = product.Images.PrimaryMedium;
     template.querySelector("img").alt += product.NameWithoutBrand;
     template.querySelector(".card__brand").innerHTML += product.Brand.Name;
     template.querySelector(".card__name").innerHTML += product.NameWithoutBrand;

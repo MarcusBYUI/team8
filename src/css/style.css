@@ -214,7 +214,21 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 }
-
+.category-container img {
+  max-width: 100px;
+}
+.category-container label {
+  display: block;
+}
+.category-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  text-align: center;
+}
+.category-container a {
+  text-decoration: none;
+  color: black;
+}
 footer {
   font-size: var(--small-font);
   padding: 1em;
