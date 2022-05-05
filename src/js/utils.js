@@ -40,3 +40,4 @@ export function renderListWithTemplate(
     parentElement.appendChild(callback(clone, product));
   });
 }
+
