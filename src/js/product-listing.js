@@ -1,11 +1,20 @@
 import ProductData from "./productData.js";
 import ProductList from "./productList.js";
+ import { loadHeaderFooter, getParams } from "./utils.js";
 
-const product = new ProductData("tents");
-
+const product = new ProductData();
+const category = getParams("category");
+const listElement = document.querySelector(".product-list")
 const listProduct = new ProductList(
-  "tents",
+  `products/search/${category}`,
   product,
-  document.querySelector(".product-list")
+  listElement
 );
 listProduct.init();
+const firstletter = category[0];
+const letter = firstletter.toUpperCase();
+
+
+document.querySelector(".product-listing-cat").innerHTML = `${letter}${category.slice(1,-1)}s`;
+
+  loadHeaderFooter();
