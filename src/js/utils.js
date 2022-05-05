@@ -40,3 +40,31 @@ export function renderListWithTemplate(
     parentElement.appendChild(callback(clone, product));
   });
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  let clone = template.content.cloneNode(true);
+
+  if (callback) {
+    clone = callback(clone, data);
+  }
+
+  parentElement.appendChild(clone);
+}
+
+export async function loadTemplate(path) {
+  const html = await fetch(path).then((response) => response.text());
+  const newTemplate = document.createElement("template");
+  newTemplate.innerHTML = html;
+  return newTemplate;
+}
+
+export async function loadHeaderFooter(headerPath, footerPath) {
+  const loadHeader = await loadTemplate(headerPath);
+  const loadFooter = await loadTemplate(footerPath);
+
+  const domHeader = document.getElementById("main-header");
+  const domFooter = document.getElementById("main-footer");
+
+  renderWithTemplate(loadHeader, domHeader, null);
+  renderWithTemplate(loadFooter, domFooter, null);
+}

@@ -1,3 +1,5 @@
+import { loadHeaderFooter } from "./utils";
+
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
@@ -31,3 +33,5 @@ function renderCartItem(item) {
 }
 
 getCartContents();
+
+loadHeaderFooter("/partials/header.html", "/partials/footer.html");

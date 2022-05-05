@@ -1,5 +1,6 @@
 import ProductData from "./productData.js";
 import ProductList from "./productList.js";
+import { loadHeaderFooter } from "./utils.js";
 
 const product = new ProductData("tents");
 
@@ -9,3 +10,5 @@ const listProduct = new ProductList(
   document.querySelector(".product-list")
 );
 listProduct.init();
+
+loadHeaderFooter("/partials/header.html", "/partials/footer.html");

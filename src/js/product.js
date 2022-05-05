@@ -1,6 +1,7 @@
 import ProductData from "./productData.js";
 import ProductDetails from "./productDetails.js";
 import { getParams } from "./utils.js";
+import { loadHeaderFooter } from "./utils.js";
 
 const product = new ProductData("tents");
 const productId = getParams("product");
@@ -8,6 +9,7 @@ const productId = getParams("product");
 const productD = new ProductDetails(productId, product);
 productD.init();
 
+loadHeaderFooter("/partials/header.html", "/partials/footer.html");
 // let products = [];
 
 // function setLocalStorage(key, data) {
