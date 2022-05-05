@@ -214,20 +214,20 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 }
-.category-container img{
+.category-container img {
   max-width: 100px;
 }
-.category-container label{
+.category-container label {
   display: block;
 }
-.category-container{
+.category-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   text-align: center;
 }
-.category-container a{
+.category-container a {
   text-decoration: none;
-  color:black;
+  color: black;
 }
 footer {
   font-size: var(--small-font);

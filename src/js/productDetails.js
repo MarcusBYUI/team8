@@ -39,7 +39,9 @@ class ProductDetails {
       ".product-brand-name-no-brand"
     ).innerHTML = this.product.NameWithoutBrand;
 
-    clone.querySelector(".product-brand-image").src = this.product.Images.PrimaryLarge;
+    clone.querySelector(
+      ".product-brand-image"
+    ).src = this.product.Images.PrimaryLarge;
     clone.querySelector(".product-brand-image").alt += this.product.Name;
     clone.querySelector(
       ".product-card__price"

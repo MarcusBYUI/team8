@@ -1,6 +1,6 @@
 // import ProductData from "./productData.js";
 // import ProductList from "./productList.js";
- import { loadHeaderFooter } from "./utils.js";
+import { loadHeaderFooter } from "./utils.js";
 
 // const product = new ProductData("tents");
 
@@ -11,4 +11,4 @@
 // );
 // listProduct.init();
 
-  loadHeaderFooter();
+loadHeaderFooter();
