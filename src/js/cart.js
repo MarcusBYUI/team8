@@ -31,3 +31,4 @@ function renderCartItem(item) {
 }
 
 getCartContents();
+
