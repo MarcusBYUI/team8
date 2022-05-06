@@ -1,5 +1,3 @@
-import { template } from "@babel/core";
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -45,7 +43,7 @@ export function renderListWithTemplate(
 
 //Code from the exmaple 
 export function renderWithTemplate(template, parent, data, callback) {
-
+  console.log(template);
   let clone = template.content.cloneNode(true);
   if(callback) {
     clone = callback(clone, data);
@@ -62,8 +60,8 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter(){
-  const header_1 = loadTemplate("./partials/header.html")
-  const footer_1 = loadTemplate("./partials/footer.html")
+  const header_1 = await loadTemplate("/partials/header.html")
+  const footer_1 = await loadTemplate("/partials/footer.html")
   const elment_header = document.querySelector("#main-header")
   const elment_footer = document.querySelector("#main-footer")
   renderWithTemplate(header_1,elment_header,null)
