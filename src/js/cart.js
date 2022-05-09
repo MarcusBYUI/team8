@@ -8,7 +8,7 @@ const cart = new CartList("so-cart", document.querySelector(".product-list"));
 cart.init();
 
 function getTotal() {
-  if (getLocalStorage("so-cart") == null) {
+  if (getLocalStorage("so-cart").length == 0) {
     document.querySelector(".cart-footer").classList.add("hide");
   } else {
     document.querySelector(".cart-footer").classList.remove("hide");

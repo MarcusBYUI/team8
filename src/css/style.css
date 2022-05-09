@@ -201,6 +201,10 @@ button {
   grid-column: 3;
 }
 
+.cart-card__delete {
+  background-color: #a4b8c4;
+}
+
 .hide {
   display: none;
 }
