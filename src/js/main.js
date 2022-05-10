@@ -1,5 +1,6 @@
 // import ProductData from "./productData.js";
 // import ProductList from "./productList.js";
+import {} from "./Alert.js";
 import { loadHeaderFooter } from "./utils.js";
 
 // const product = new ProductData("tents");
