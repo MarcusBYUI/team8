@@ -12,6 +12,70 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+
+        <form action="../checkout/index.html">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label class="top-label"
+              >First Name: <input type="text" name="first-name" required
+            /></label>
+            <label class="top-label"
+              >Last Name: <input type="text" name="last-name" required
+            /></label>
+            <label class="top-label"
+              >Street: <input type="text" name="street" required
+            /></label>
+            <label class="top-label"
+              >City: <input type="text" name="city" required
+            /></label>
+            <label class="top-label"
+              >State: <input type="text" name="state" required
+            /></label>
+            <label class="top-label"
+              >Zip: <input type="number" name="zip-code" id="zip-code" required
+            /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment</legend>
+            <label class="top-label"
+              >Card number: <input type="text" name="card-number" required
+            /></label>
+            <label class="top-label"
+              >Expiration: <input type="month" name="expiration-date" required
+            /></label>
+            <label class="top-label"
+              >Security Code:
+              <input type="number" name="security-code" required
+            /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Order Summary</legend>
+
+            <div class="subtotal">
+              <p>Item Subtotal (<span id="items-number"></span>)</p>
+              <p class="cart-subtotal"></p>
+            </div>
+
+            <div class="subtotal">
+              <p>Shipping Estimate</p>
+              <p id="shipping"></p>
+            </div>
+
+            <div class="subtotal">
+              <p>Tax</p>
+              <p id="tax"></p>
+            </div>
+
+            <div class="subtotal">
+              <p><b>Order Total: </b></p>
+              <p id="final-total"><b></b></p>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="checkout-button">Checkout</button>
+        </form>
       </section>
     </main>
     <footer id="main-footer"></footer>

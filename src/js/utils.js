@@ -73,3 +73,15 @@ export async function loadHeaderFooter() {
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
 }
+
+export function getTotal() {
+  // Returns total from all items in local storage. It uses FinalPrice.
+  const cartProducts = getLocalStorage("so-cart");
+  let total = 0;
+
+  cartProducts.forEach((product) => {
+    total += product.FinalPrice;
+  });
+
+  return total;
+}
