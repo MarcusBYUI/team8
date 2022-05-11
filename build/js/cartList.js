@@ -35,7 +35,8 @@ export default class d {
       (e.querySelector(".card__name").textContent = t.Name),
       (e.querySelector(".cart-card__color").textContent =
         t.Colors[0].ColorName),
-      (e.querySelector(".cart-card__price").textContent += t.FinalPrice),
+      (e.querySelector(".cart-card__price").textContent +=
+        t.SuggestedRetailPrice),
       e
     );
   }

@@ -19,7 +19,7 @@ export default class CartList {
     template.querySelector(".cart-card__color").textContent =
       product.Colors[0].ColorName;
     template.querySelector(".cart-card__price").textContent +=
-      product.FinalPrice;
+      product.SuggestedRetailPrice;
     return template;
   }
 

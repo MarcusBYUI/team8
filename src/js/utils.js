@@ -75,12 +75,12 @@ export async function loadHeaderFooter() {
 }
 
 export function getTotal() {
-  // Returns total from all items in local storage. It uses FinalPrice.
+  // Returns total from all items in local storage. It uses SuggestedRetailPrice.
   const cartProducts = getLocalStorage("so-cart");
   let total = 0;
 
   cartProducts.forEach((product) => {
-    total += product.FinalPrice;
+    total += product.SuggestedRetailPrice;
   });
 
   return total;

@@ -1,4 +1,4 @@
-import o from "./productData.js";
+import o from "./externalServices.js";
 import r from "./productList.js";
 import { loadHeaderFooter as e, getParams as c } from "./utils.js";
 const s = new o(),

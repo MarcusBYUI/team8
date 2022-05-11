@@ -3,14 +3,19 @@ import CheckoutProcess from "./checkoutProcess";
 
 loadHeaderFooter();
 
-const currentLocal = getLocalStorage("so-cart");
-const currentTotal = getTotal();
-console.log(currentLocal.length);
-console.log(currentTotal);
+//Testing
+// const currentLocal = getLocalStorage("so-cart");
+// const currentTotal = getTotal();
+// console.log(currentLocal);
+// console.log(currentLocal.length);
+// console.log(currentTotal);
+const date = new Date();
+console.log(date);
 
-const checkingOut = new CheckoutProcess();
+//Testing
 
-window.onload = checkingOut.subtotal;
-checkingOut.finalTotal();
+const checkingOut = new CheckoutProcess("so-cart");
+
+checkingOut.init();
 
 // localStorage.setItem("so-cart", "[]");

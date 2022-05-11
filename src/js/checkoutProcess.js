@@ -1,32 +1,90 @@
 import { getLocalStorage, getTotal } from "./utils";
+import ExternalServices from "./externalServices";
+
+function packageItems(items) {
+  const newArray = items.map((product) => {
+    const newProduct = {};
+
+    newProduct.id = product.Id;
+    newProduct.name = product.Name;
+    newProduct.price = product.SuggestedRetailPrice;
+    newProduct.quantity = 1;
+
+    return newProduct;
+  });
+
+  return newArray;
+}
 
 export default class CheckoutProcess {
-  subtotal() {
-    const itemsNumber = getLocalStorage("so-cart").length;
-    const total = getTotal();
+  constructor(key) {
+    this.key = key;
+    this.list = [];
+    this.numbOfItems = 0;
+    this.itemTotal = 0;
+    this.shipping = 0;
+    this.tax = 0;
+    this.orderTotal = 0;
+  }
 
-    document.querySelector("#items-number").innerHTML = itemsNumber;
-    document.querySelector(".cart-subtotal").innerHTML = `$${total}`;
+  init() {
+    this.list = getLocalStorage(this.key);
+    this.subtotal();
+
+    document.querySelector("#checkout-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.checkout(e.target);
+    });
+  }
+
+  subtotal() {
+    this.numbOfItems = this.list.length;
+    this.itemTotal = getTotal();
+
+    document.querySelector("#items-number").innerHTML = this.numbOfItems;
+    document.querySelector(".cart-subtotal").innerHTML = `$${this.itemTotal}`;
+
+    this.finalTotal();
   }
 
   finalTotal() {
     document.querySelector("#zip-code").addEventListener("change", () => {
-      const total = getTotal();
-      const itemsNumber = getLocalStorage("so-cart").length;
+      this.shipping = 10 + (this.numbOfItems - 1) * 2;
+      this.tax = this.itemTotal * 0.06;
+      this.orderTotal = this.itemTotal + this.shipping + this.tax;
 
-      const shipping = 10 + (itemsNumber - 1) * 2;
-      const tax = total * 0.06;
-      const final = total + shipping + tax;
-
-      document.querySelector("#shipping").innerHTML = `$${parseFloat(
-        shipping
-      ).toFixed(2)}`;
-      document.querySelector("#tax").innerHTML = `$${parseFloat(tax).toFixed(
-        2
-      )}`;
-      document.querySelector("#final-total").innerHTML = `$${parseFloat(
-        final
-      ).toFixed(2)}`;
+      this.displayTotal();
     });
+  }
+
+  displayTotal() {
+    document.querySelector("#shipping").innerHTML = `$${parseFloat(
+      this.shipping
+    ).toFixed(2)}`;
+    document.querySelector("#tax").innerHTML = `$${parseFloat(this.tax).toFixed(
+      2
+    )}`;
+    document.querySelector("#final-total").innerHTML = `$${parseFloat(
+      this.orderTotal
+    ).toFixed(2)}`;
+  }
+
+  async checkout(form) {
+    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+    const formObj = new FormData(form);
+    const currentDate = new Date();
+    const formJSON = {}; //I will turn Form Data to JSON.
+    const simplifiedItems = packageItems(this.list); // Simplified list.
+
+    for (let key of formObj.keys()) {
+      formJSON[key] = formObj.get(key);
+    }
+
+    formJSON.orderDate = currentDate; // Adding date and simplified list to JSON.
+    formJSON.items = simplifiedItems;
+
+    // call the checkout method in our ExternalServices module and send it our data object.
+    const external = new ExternalServices();
+    external.checkout(formJSON);
   }
 }
