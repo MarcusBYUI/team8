@@ -44,6 +44,8 @@ export function renderListWithTemplate(
   list,
   callback
 ) {
+  parentElement.innerHTML = "";
+
   list.forEach((product) => {
     const clone = template.content.cloneNode(true);
     parentElement.appendChild(callback(clone, product));
