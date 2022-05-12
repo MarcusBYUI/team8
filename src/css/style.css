@@ -254,3 +254,28 @@ footer {
 .quantity-grid :last-child {
   grid-column: 3/4;
 }
+
+.cart-count {
+  margin-bottom: -2px;
+  color: rgb(255, 255, 255);
+  background-color: #1e1e1e;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+.hide {
+  display: none;
+}
+.cart-footer {
+  background-color: #a4b8c4;
+  padding: 1rem;
+  margin: 0.5em;
+  text-align: end;
+}
+
+.cart-footer a {
+  text-decoration: none;
+}
+.cart-total {
+  font-size: 1.5rem;
+}

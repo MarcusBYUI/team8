@@ -1,4 +1,8 @@
-import { setLocalStorage, getLocalStorage } from "../../src/js/utils";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  loadCartCounter,
+} from "../../src/js/utils";
 class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -17,14 +21,39 @@ class ProductDetails {
   }
 
   addToCart() {
-    const item = getLocalStorage("so-cart");
-    if (Array.isArray(item)) {
-      const list = [...item, this.product];
+    const productList = getLocalStorage("so-cart");
+    if (Array.isArray(productList)) {
+      if (productList.length == 0) {
+        const thisProduct = this.product;
+        thisProduct["count"] = 1;
 
-      setLocalStorage("so-cart", list);
+        const list = [...productList, thisProduct];
+        setLocalStorage("so-cart", list);
+      } else {
+        let not = true;
+        productList.forEach((product) => {
+          if (product.Id == this.product.Id) {
+            not = false;
+            product.count++;
+            setLocalStorage("so-cart", productList);
+          }
+        });
+        if (not) {
+          const thisProduct = this.product;
+          thisProduct["count"] = 1;
+
+          const list = [...productList, thisProduct];
+          setLocalStorage("so-cart", list);
+        }
+      }
     } else {
-      setLocalStorage("so-cart", [this.product]);
+      const thisProduct = this.product;
+      thisProduct["count"] = 1;
+      setLocalStorage("so-cart", [thisProduct]);
+      return;
     }
+
+    loadCartCounter();
   }
 
   renderProductDetails() {

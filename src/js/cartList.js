@@ -2,6 +2,8 @@ import {
   renderListWithTemplate,
   getLocalStorage,
   setLocalStorage,
+  loadCartCounter,
+  totalToPage,
 } from "./utils.js";
 
 export default class CartList {
@@ -13,31 +15,6 @@ export default class CartList {
 
   async init() {
     const list = getLocalStorage(this.key);
-    for (let i = 0; i < list.length; i++) {
-      const element = list[i];
-      let count = 0;
-      let index = [];
-      for (let j = 0; j < list.length; j++) {
-        if (element.Id == list[j].Id) {
-          count++;
-          if (count > 1) {
-            index.push(j);
-          }
-        }
-      }
-      if ("count" in list[i]) {
-        continue;
-      } else {
-        if (count > 1) {
-          element["count"] = count;
-          index.forEach((index) => {
-            list.splice(index, 1);
-          });
-        } else {
-          element["count"] = 1;
-        }
-      }
-    }
 
     this.list = list;
     this.reRender();
@@ -76,6 +53,8 @@ export default class CartList {
           }
         }
         setLocalStorage("so-cart", this.list);
+        loadCartCounter();
+        totalToPage();
         this.reRender();
 
         break;
@@ -92,6 +71,8 @@ export default class CartList {
           }
         }
         setLocalStorage("so-cart", this.list);
+        loadCartCounter();
+        totalToPage();
         this.reRender();
 
         break;
@@ -108,8 +89,9 @@ export default class CartList {
     template.querySelector("#decrease").setAttribute("data-id", product.Id);
     template.querySelector("#increase").setAttribute("data-id", product.Id);
     template.querySelector(".cart-card__quantity").textContent = product.count;
-    template.querySelector(".cart-card__price").textContent +=
-      product.FinalPrice * product.count;
+    template.querySelector(".cart-card__price").textContent += parseFloat(
+      product.FinalPrice * product.count
+    ).toFixed(2);
     return template;
   }
 

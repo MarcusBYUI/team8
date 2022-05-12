@@ -67,6 +67,18 @@ export async function loadTemplate(path) {
   return template;
 }
 
+export function loadCartCounter() {
+  let count = 0;
+  const list = getLocalStorage("so-cart");
+  if (list.length > 0) {
+    list.forEach((product) => {
+      count += product.count;
+    });
+  } else {
+    count = 0;
+  }
+  document.querySelector(".cart-count").innerHTML = count;
+}
 export async function loadHeaderFooter() {
   const header = await loadTemplate("../partials/header.html");
   const footer = await loadTemplate("../partials/footer.html");
@@ -74,4 +86,30 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById("main-footer");
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+  loadCartCounter();
+}
+
+export function getTotal() {
+  const cartProducts = getLocalStorage("so-cart");
+  let total = 0;
+
+  cartProducts.forEach((product) => {
+    total += product.FinalPrice * product.count;
+  });
+
+  return total;
+}
+
+export function totalToPage() {
+  if (getLocalStorage("so-cart") == 0 || getLocalStorage("so-cart") == null) {
+    document.querySelector(".cart-footer").classList.add("hide");
+  } else {
+    document.querySelector(".cart-footer").classList.remove("hide");
+
+    const total = getTotal();
+
+    document.querySelector(".cart-total").innerHTML = `Total: $${parseFloat(
+      total
+    ).toFixed(2)}`;
+  }
 }
