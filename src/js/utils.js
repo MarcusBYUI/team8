@@ -73,3 +73,12 @@ export async function loadHeaderFooter() {
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
 }
+
+export function gettingTotal(){
+  const item_local = getLocalStorage("so-cart");
+  let total = 0;
+  item_local.forEach(element => {
+    total += element.SuggestedRetailPrice;
+  });
+  return total
+}
