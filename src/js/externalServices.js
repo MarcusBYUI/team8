@@ -4,7 +4,7 @@ function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error("Bad Response");
+    throw { name: "servicesError", message: res.json() };
   }
 }
 
@@ -33,10 +33,9 @@ class ExternalServices {
       body: JSON.stringify(orderObj),
     };
 
-    fetch(serverURL, options)
-      .then((resp) => resp.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log("There was an error: " + err));
+    const response = await fetch(serverURL, options);
+    const data = await convertToJson(response);
+    return data;
   }
 }
 

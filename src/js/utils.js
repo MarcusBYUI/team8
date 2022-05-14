@@ -70,7 +70,7 @@ export async function loadTemplate(path) {
 export function loadCartCounter() {
   let count = 0;
   const list = getLocalStorage("so-cart");
-  if (list.length > 0) {
+  if (Array.isArray(list) && list.length > 0) {
     list.forEach((product) => {
       count += product.count;
     });
