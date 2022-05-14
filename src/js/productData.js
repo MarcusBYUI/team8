@@ -8,7 +8,7 @@ function convertToJson(res) {
   }
 }
 
-class ProductData {
+class ExternalServices {
   constructor() {}
 
   async getData(category) {
@@ -23,4 +23,4 @@ class ProductData {
   }
 }
 
-export default ProductData;
+export default ExternalServices;
