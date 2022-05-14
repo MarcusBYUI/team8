@@ -44,6 +44,8 @@ export function renderListWithTemplate(
   list,
   callback
 ) {
+  parentElement.innerHTML = "";
+
   list.forEach((product) => {
     const clone = template.content.cloneNode(true);
     parentElement.appendChild(callback(clone, product));
@@ -65,6 +67,18 @@ export async function loadTemplate(path) {
   return template;
 }
 
+export function loadCartCounter() {
+  let count = 0;
+  const list = getLocalStorage("so-cart");
+  if (list.length > 0) {
+    list.forEach((product) => {
+      count += product.count;
+    });
+  } else {
+    count = 0;
+  }
+  document.querySelector(".cart-count").innerHTML = count;
+}
 export async function loadHeaderFooter() {
   const header = await loadTemplate("../partials/header.html");
   const footer = await loadTemplate("../partials/footer.html");
@@ -72,4 +86,32 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById("main-footer");
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+  loadCartCounter();
+}
+
+export function getTotal() {
+  const cartProducts = getLocalStorage("so-cart");
+  let totalAmount = 0;
+  let totalInCart = 0;
+
+  cartProducts.forEach((product) => {
+    totalAmount += product.FinalPrice * product.count;
+    totalInCart += product.count;
+  });
+
+  return [totalAmount, totalInCart];
+}
+
+export function totalToPage() {
+  if (getLocalStorage("so-cart") == 0 || getLocalStorage("so-cart") == null) {
+    document.querySelector(".cart-footer").classList.add("hide");
+  } else {
+    document.querySelector(".cart-footer").classList.remove("hide");
+
+    const [totalAmount, totalInCart] = getTotal();
+
+    document.querySelector(".cart-total").innerHTML = `Total: $${parseFloat(
+      totalAmount
+    ).toFixed(2)}`;
+  }
 }
