@@ -1,4 +1,5 @@
 import { getLocalStorage, gettingTotal } from "./utils";
+import ExternalServices from "./externalServices";
 
 export default class CheckoutProcess{
     constructor(key){
