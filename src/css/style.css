@@ -279,3 +279,46 @@ footer {
 .cart-total {
   font-size: 1.5rem;
 }
+
+.checkout-button {
+  background-color: #303030;
+  margin-right: 0;
+}
+
+form {
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+form .checkout-button {
+  margin: 1rem auto;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+legend {
+  font-size: 1.5rem;
+  color: #303030;
+  font-weight: bold;
+}
+
+.top-label {
+  margin: 0.5rem;
+}
+
+.top-label input {
+  display: block;
+  padding: 0.5rem;
+}
+
+.subtotal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: 0 0.5em;
+}

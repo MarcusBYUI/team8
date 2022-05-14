@@ -91,13 +91,15 @@ export async function loadHeaderFooter() {
 
 export function getTotal() {
   const cartProducts = getLocalStorage("so-cart");
-  let total = 0;
+  let totalAmount = 0;
+  let totalInCart = 0;
 
   cartProducts.forEach((product) => {
-    total += product.FinalPrice * product.count;
+    totalAmount += product.FinalPrice * product.count;
+    totalInCart += product.count;
   });
 
-  return total;
+  return [totalAmount, totalInCart];
 }
 
 export function totalToPage() {
@@ -106,10 +108,10 @@ export function totalToPage() {
   } else {
     document.querySelector(".cart-footer").classList.remove("hide");
 
-    const total = getTotal();
+    const [totalAmount, totalInCart] = getTotal();
 
     document.querySelector(".cart-total").innerHTML = `Total: $${parseFloat(
-      total
+      totalAmount
     ).toFixed(2)}`;
   }
 }
