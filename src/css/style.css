@@ -203,21 +203,19 @@ button {
 }
 
 /* Checkout Alert */
-.alertparenttemplate{
+.alertparenttemplate {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 80% 10%;
   padding: 1rem;
   background-color: #fac0c0;
   max-width: 30rem;
   margin: 0 auto;
   margin-top: 0.5rem;
 }
-#error-button{
+#error-button {
   display: block;
-  background-color: #d45656;
+  background-color: transparent;
 }
-
-
 
 @media screen and (min-width: 500px) {
   body {
