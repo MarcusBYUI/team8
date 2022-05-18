@@ -49,7 +49,9 @@ export default class CheckoutProcess {
     this.itemTotal = totalAmount;
 
     document.querySelector("#items-number").innerHTML = this.numbOfItems;
-    document.querySelector(".cart-subtotal").innerHTML = `$${this.itemTotal}`;
+    document.querySelector(".cart-subtotal").innerHTML = `$${parseFloat(
+      this.itemTotal
+    ).toFixed(2)}`;
 
     this.finalTotal();
   }

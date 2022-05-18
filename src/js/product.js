@@ -1,4 +1,4 @@
-import ExternalServices from "./ExternalServices.js";
+import ExternalServices from "./externalServices.js";
 import ProductDetails from "./productDetails.js";
 import { getParams } from "./utils.js";
 import { loadHeaderFooter } from "./utils.js";

@@ -108,7 +108,7 @@ export function totalToPage() {
   } else {
     document.querySelector(".cart-footer").classList.remove("hide");
 
-    const [totalAmount, totalInCart] = getTotal();
+    const totalAmount = getTotal()[0];
 
     document.querySelector(".cart-total").innerHTML = `Total: $${parseFloat(
       totalAmount
