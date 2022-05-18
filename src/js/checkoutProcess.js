@@ -1,4 +1,9 @@
-import { getLocalStorage, getTotal } from "./utils";
+import {
+  getLocalStorage,
+  getTotal,
+  setLocalStorage,
+  renderWithTemplate,
+} from "./utils";
 import ExternalServices from "./externalServices";
 
 function packageItems(items) {
@@ -86,7 +91,44 @@ export default class CheckoutProcess {
     formJSON.items = simplifiedItems;
 
     // call the checkout method in our ExternalServices module and send it our data object.
-    const external = new ExternalServices();
-    external.checkout(formJSON);
+
+    try {
+      const external = new ExternalServices();
+      const orderInfo = await external.checkout(formJSON);
+      setLocalStorage(this.key, []);
+      document.getElementById("checkout-form").reset();
+
+      window.location.assign(`../checkedout?orderID=${orderInfo.orderId}`);
+    } catch (err) {
+      const error = await err.message;
+
+      for (let key of Object.keys(error)) {
+        const errormessage = error[key];
+        this.render(errormessage);
+      }
+    }
+  }
+
+  render(error) {
+    const template = document.getElementById("checkout-alert");
+    const parent = document.querySelector(".parent-alert");
+    renderWithTemplate(template, parent, error, this.prepareTemplate);
+    const errorClass = error.replace(/\s/g, "");
+    document.querySelector(`.${errorClass}`).addEventListener("click", () => {
+      document.querySelector(`#${errorClass}`).remove();
+    });
+  }
+
+  prepareTemplate(template, error) {
+    template.querySelector(".error-type").innerHTML = error;
+    template.querySelector(".alertparenttemplate").id = error.replace(
+      /\s/g,
+      ""
+    );
+    template
+      .querySelector("#error-button")
+      .classList.add(error.replace(/\s/g, ""));
+
+    return template;
   }
 }

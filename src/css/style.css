@@ -202,6 +202,21 @@ button {
   grid-column: 3;
 }
 
+/* Checkout Alert */
+.alertparenttemplate {
+  display: grid;
+  grid-template-columns: 80% 10%;
+  padding: 1rem;
+  background-color: #fac0c0;
+  max-width: 30rem;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+}
+#error-button {
+  display: block;
+  background-color: transparent;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -321,4 +336,12 @@ legend {
   justify-content: space-between;
 
   margin: 0 0.5em;
+}
+
+.success-container {
+  background-color: #469e5d;
+  color: white;
+  margin: 20px auto;
+  text-align: center;
+  padding: 15px;
 }

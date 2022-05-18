@@ -50,7 +50,6 @@ class ProductDetails {
       const thisProduct = this.product;
       thisProduct["count"] = 1;
       setLocalStorage("so-cart", [thisProduct]);
-      return;
     }
 
     loadCartCounter();
