@@ -6,6 +6,18 @@ import {
 } from "./utils";
 import ExternalServices from "./externalServices";
 
+const services = new ExternalServices();
+function formDataToJSON(formElement) {    
+  var formData = new FormData(formElement),
+      convertedJSON = {};
+
+  formData.forEach(function(value, key) { 
+      convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+
 function packageItems(items) {
   const newArray = items.map((product) => {
     const newProduct = {};
@@ -78,59 +90,32 @@ export default class CheckoutProcess {
     ).toFixed(2)}`;
   }
 
-  async checkout(form) {
-    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-    const formObj = new FormData(form);
-    const currentDate = new Date();
-    const formJSON = {}; //I will turn Form Data to JSON.
-    const simplifiedItems = packageItems(this.list); // Simplified list.
+//  
+async checkout() {
+  var formElement = document.querySelector("form");
 
-    for (let key of formObj.keys()) {
-      formJSON[key] = formObj.get(key);
-    }
-
-    formJSON.orderDate = currentDate; // Adding date and simplified list to JSON.
-    formJSON.items = simplifiedItems;
-
-    // call the checkout method in our ExternalServices module and send it our data object.
-
-    try {
-      const external = new ExternalServices();
-      const orderInfo = await external.checkout(formJSON);
-      setLocalStorage(this.key, []);
-      document.getElementById("checkout-form").reset();
-
-      window.location.assign(`../checkedout?orderID=${orderInfo.orderId}`);
-    } catch (err) {
-      const error = await err.message;
-
-      for (let key of Object.keys(error)) {
-        const errormessage = error[key];
-        this.render(errormessage);
-      }
-    }
-  }
-
-  render(error) {
-    const template = document.getElementById("checkout-alert");
-    const parent = document.querySelector(".parent-alert");
-    renderWithTemplate(template, parent, error, this.prepareTemplate);
-    const errorClass = error.replace(/\s/g, "");
-    document.querySelector(`.${errorClass}`).addEventListener("click", () => {
-      document.querySelector(`#${errorClass}`).remove();
-    });
-  }
-
-  prepareTemplate(template, error) {
-    template.querySelector(".error-type").innerHTML = error;
-    template.querySelector(".alertparenttemplate").id = error.replace(
-      /\s/g,
-      ""
-    );
-    template
-      .querySelector("#error-button")
-      .classList.add(error.replace(/\s/g, ""));
-
-    return template;
-  }
+  const json = formDataToJSON(formElement);
+  // add totals, and item details
+  json.orderDate = new Date();
+  json.orderTotal = this.orderTotal;
+  json.tax = this.tax;
+  json.shipping = this.shipping;
+  json.items = packageItems(this.list);
+ console.log(json);
+ try {
+  const res = await services.checkout(json);
+  console.log(res);
+  setLocalStorage("so-cart", []);
+  location.assign("/checkout/checkedout.html");
+ }
+ catch(err) {
+   // get rid of any preexisting alerts.
+  //  removeAllAlerts();
+  //  for(let message in err.message) {
+  //     alertMessage(err.message[message]);
+  //  }
+   
+  //  console.log(err);
+ }
+}
 }
