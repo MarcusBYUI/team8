@@ -217,19 +217,6 @@ button {
   background-color: transparent;
 }
 
-@media screen and (min-width: 500px) {
-  body {
-    max-width: 1080px;
-    margin: auto;
-  }
-  .mission {
-    font-size: 1.2em;
-  }
-  .cart-card {
-    font-size: inherit;
-    grid-template-columns: 150px auto 15%;
-  }
-}
 .category-container img {
   max-width: 100px;
 }
@@ -344,4 +331,101 @@ legend {
   margin: 20px auto;
   text-align: center;
   padding: 15px;
+}
+
+.login-form {
+  background-color: #1e1e1e;
+  width: 370px;
+  width: 90%;
+
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.login-form h1 {
+  color: white;
+  text-align: center;
+  padding: 0;
+  margin: 8px 0;
+}
+
+#login-form label,
+#login-form input {
+  display: block;
+}
+
+#login-form label {
+  margin-top: 15px;
+  color: white;
+}
+
+#login-form label input {
+  margin-top: 3px;
+  width: 95%;
+  height: 34px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+}
+
+.login-submit {
+  display: block;
+
+  margin: 25px auto 0 auto;
+  width: 50%;
+  padding: 6px 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.login-submit:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
+#login-form label input:required {
+  border-right: 5px solid red;
+  border-left: 5px solid red;
+}
+
+#login-form label input:required:valid {
+  border-right: 5px solid rgb(60, 190, 0);
+  border-left: 5px solid rgb(60, 190, 0);
+}
+
+.admin-container li {
+  list-style: none;
+}
+
+.admin-container tr:nth-child(even) {
+  background-color: #303030;
+  color: white;
+}
+
+.admin-container td {
+  padding: 15px;
+}
+
+@media screen and (min-width: 500px) {
+  body {
+    max-width: 1080px;
+    margin: auto;
+  }
+  .mission {
+    font-size: 1.2em;
+  }
+  .cart-card {
+    font-size: inherit;
+    grid-template-columns: 150px auto 15%;
+  }
+
+  .login-form {
+    width: 400px;
+  }
+
+  #login-form label input {
+    height: 28px;
+  }
 }
