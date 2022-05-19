@@ -19,7 +19,7 @@ export default class Admin {
         }
     }
     showing_login(){
-        // Adding the form in the html file
+        // Adding the form in the html file by creating this function
         this.main_element.innerHTML = loginHtml();
         //
         document.querySelector("#loginBtn").addEventListener("click", (e) => {
@@ -39,7 +39,7 @@ export default class Admin {
           } 
     }
 }
-// Templates This will ask the user to enter his or her Credentials
+// Templates This will ask the user to enter his or her Credentials (This is the actual html)
 function loginHtml(){
     return `<fieldset class="login-form">
     <legend>Login</legend>
@@ -55,7 +55,7 @@ function loginHtml(){
   </fieldset>`;
   } 
   
-//   Template to display
+//   Template to display the order (HTML)
   function displayOrder() {
     return `<h2>Current Orders</h2>
     <table id="orders">
