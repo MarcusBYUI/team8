@@ -22,6 +22,30 @@ class ExternalServices {
     return products;
   }
 
+  async loginRequest(user){
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    };
+    const response = await fetch(baseURL + "login", options).then(convertToJson);
+    return response.accesToken
+
+  }
+
+  async getOrders(token) {
+    const options = {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    };
+    const response = await fetch(baseURL + "orders", options).then(convertToJson);
+    return response;
+  }
+
   async checkout(orderObj) {
     const serverURL = "http://157.201.228.93:2992/checkout";
 

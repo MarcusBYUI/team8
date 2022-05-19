@@ -217,6 +217,26 @@ button {
   background-color: transparent;
 }
 
+/* Admin Page */
+main.divider{
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  align-items: center;
+  align-content: center;
+  /* text-align: center; */
+}
+.login-form input{
+  display: block;
+  padding: 0.5rem;
+  height: 50px;
+  align-content: center;
+  width: 100%;
+  max-width: 50rem;
+}
+
+
+
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
