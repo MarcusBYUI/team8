@@ -37,6 +37,37 @@ class ExternalServices {
     const data = await convertToJson(response);
     return data;
   }
+
+  async loginRequest(creds) {
+    const serverURL = "http://157.201.228.93:2992/login";
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify(creds),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(serverURL, options);
+    const data = await convertToJson(response);
+    return data;
+  }
+
+  async fetchOrders(token) {
+    const serverURL = "http://157.201.228.93:2992/orders";
+
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await fetch(serverURL, options);
+    const data = await convertToJson(response);
+    return data;
+  }
 }
 
 export default ExternalServices;
