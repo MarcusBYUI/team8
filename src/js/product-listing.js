@@ -1,6 +1,6 @@
 import ExternalServices from "./externalServices.js";
 import ProductList from "./productList.js";
-import { loadHeaderFooter, getParams, changeHeaderPath } from "./utils.js";
+import { loadHeaderFooter, getParams } from "./utils.js";
 
 const product = new ExternalServices();
 const category = getParams("category");

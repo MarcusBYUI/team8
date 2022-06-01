@@ -52,13 +52,7 @@ export function renderListWithTemplate(
   });
 }
 
-export function renderWithTemplate(
-  template,
-  parentElement,
-  data,
-  callback,
-  notHome = false
-) {
+export function renderWithTemplate(template, parentElement, data, callback) {
   let clone = template.content.cloneNode(true);
   if (callback) {
     clone = callback(clone, data);
@@ -114,7 +108,6 @@ export async function loadHeaderFooter() {
 
 export function getTotal() {
   const cartProducts = getLocalStorage("so-cart");
-  console.log(cartProducts);
   let totalAmount = 0;
   let totalInCart = 0;
 
