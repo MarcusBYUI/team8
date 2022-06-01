@@ -100,7 +100,7 @@ export default class CheckoutProcess {
       setLocalStorage(this.key, []);
       document.getElementById("checkout-form").reset();
 
-      window.location.assign(`../checkedout?orderID=${orderInfo.orderId}`);
+      window.location.assign(`../checkedout/?orderID=${orderInfo.orderId}`);
     } catch (err) {
       const error = await err.message;
 

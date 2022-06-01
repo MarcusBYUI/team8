@@ -52,7 +52,13 @@ export function renderListWithTemplate(
   });
 }
 
-export function renderWithTemplate(template, parentElement, data, callback) {
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback,
+  notHome = false
+) {
   let clone = template.content.cloneNode(true);
   if (callback) {
     clone = callback(clone, data);
@@ -80,17 +86,35 @@ export function loadCartCounter() {
   document.querySelector(".cart-count").innerHTML = count;
 }
 export async function loadHeaderFooter() {
-  const header = await loadTemplate("partials/header.html");
-  const footer = await loadTemplate("partials/footer.html");
+  const currentPage = document.URL;
+  let initialPath = "";
+  let notHome = false;
+
+  if (
+    currentPage.includes("admin") ||
+    currentPage.includes("cart") ||
+    currentPage.includes("checkedout") ||
+    currentPage.includes("checkout") ||
+    currentPage.includes("product_pages") ||
+    currentPage.includes("product-listing")
+  ) {
+    initialPath = "../";
+    notHome = true;
+  }
+
+  const header = await loadTemplate(`${initialPath}partials/header.html`);
+  const footer = await loadTemplate(`${initialPath}partials/footer.html`);
   const headerElement = document.getElementById("main-header");
   const footerElement = document.getElementById("main-footer");
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
   loadCartCounter();
+  notHome && changeHeaderPath();
 }
 
 export function getTotal() {
   const cartProducts = getLocalStorage("so-cart");
+  console.log(cartProducts);
   let totalAmount = 0;
   let totalInCart = 0;
 
@@ -114,4 +138,14 @@ export function totalToPage() {
       totalAmount
     ).toFixed(2)}`;
   }
+}
+
+export function changeHeaderPath() {
+  const logoLink = document.querySelector("#logo-link");
+  const logoImg = document.querySelector("#logo-img");
+  const cartLink = document.querySelector("#cart-link");
+
+  logoLink.setAttribute("href", "../");
+  logoImg.setAttribute("src", "../images/noun_Tent_2517.svg");
+  cartLink.setAttribute("href", "../cart");
 }
